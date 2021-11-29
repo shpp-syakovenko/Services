@@ -1,7 +1,9 @@
 package ru.sumin.servicestest
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import ru.sumin.servicestest.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -15,7 +17,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.simpleService.setOnClickListener {
-            startService(MyService.newInstance(this))
+            // Destroy service MyForegroundService
+            stopService(MyForegroundService.newInstance(this@MainActivity))
+
+            //startService(MyService.newInstance(this))
+            //Toast.makeText(this@MainActivity, "Start", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.foregroundService.setOnClickListener {
+            ContextCompat.startForegroundService(this@MainActivity, MyForegroundService.newInstance(this))
+            Toast.makeText(this@MainActivity, "Start", Toast.LENGTH_SHORT).show()
         }
     }
+
 }
