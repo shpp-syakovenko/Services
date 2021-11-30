@@ -28,6 +28,12 @@ class MainActivity : AppCompatActivity() {
             ContextCompat.startForegroundService(this@MainActivity, MyForegroundService.newInstance(this))
             Toast.makeText(this@MainActivity, "Start", Toast.LENGTH_SHORT).show()
         }
+
+        binding.intentService.setOnClickListener {
+            Toast.makeText(this@MainActivity, "Start", Toast.LENGTH_SHORT).show()
+            ContextCompat.startForegroundService(this, MyIntentService.newInstance(this))
+
+        }
     }
 
 }

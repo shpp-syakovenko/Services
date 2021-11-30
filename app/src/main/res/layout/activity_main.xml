@@ -64,4 +64,5 @@
         android:layout_height="wrap_content"
         android:text="@string/work_manager"
         />
+
 </LinearLayout>
