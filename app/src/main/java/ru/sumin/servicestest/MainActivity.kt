@@ -10,6 +10,8 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.work.ExistingWorkPolicy
+import androidx.work.WorkManager
 import ru.sumin.servicestest.MyJobService.Companion.JOB_SERVICE_ID
 import ru.sumin.servicestest.databinding.ActivityMainBinding
 
@@ -74,6 +76,15 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-    }
+        binding.workManager.setOnClickListener {
+            val workManager = WorkManager.getInstance(applicationContext)
 
+            // Запуск worker
+            workManager.enqueueUniqueWork(
+                MyWorker.WORK_NAME,
+                ExistingWorkPolicy.APPEND,
+                MyWorker.makeRequest(page++)
+            )
+        }
+    }
 }
